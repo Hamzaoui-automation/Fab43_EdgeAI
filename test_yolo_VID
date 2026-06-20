@@ -1,0 +1,36 @@
+from ultralytics import YOLO
+import cv2
+
+# 1. Load the ONNX model
+model = YOLO('best.onnx', task='detect')
+
+# 2. Use the full path to your video
+# Change the path below to match your actual location
+video_path = r'C:\Users\ASUS\Desktop\PrintGuard_Test\PrintGuard\test_video.mp4'
+
+# 3. Open the video stream
+cap = cv2.VideoCapture(video_path)
+
+if not cap.isOpened():
+    print("❌ Error: Could not open video. Check the file path.")
+else:
+    print("✅ Video opened. Starting inference... (Press 'q' to stop)")
+
+    while cap.isOpened():
+        success, frame = cap.read()
+        if not success:
+            break
+
+        # 4. Inference (device='cpu' is default for ONNX on local CPU)
+        results = model.predict(frame, conf=0.25, device='cpu')
+
+        # 5. Display
+        annotated_frame = results[0].plot()
+        cv2.imshow("PrintGuard ONNX Local Inference", annotated_frame)
+
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+
+cap.release()
+cv2.destroyAllWindows()
+print("✅ Inference finished.")
