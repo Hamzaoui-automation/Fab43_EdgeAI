@@ -1,0 +1,20 @@
+# Core inference
+onnxruntime==1.20.1
+numpy
+
+# Computer vision
+opencv-python
+
+# YOLOv8
+ultralytics
+
+# Required to load prototypes.pkl (saved as PyTorch tensors)
+# CPU-only version — install with:
+# pip install torch --index-url https://download.pytorch.org/whl/cpu
+torch
+
+# Image processing
+pillow
+
+# Future — printer serial control (uncomment when hardware is connected)
+# pyserial

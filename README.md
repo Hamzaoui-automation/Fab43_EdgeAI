@@ -113,6 +113,10 @@ source venv/bin/activate     # Linux / Pi
 ### 4. Install dependencies
 
 ```bash
+# Install torch CPU-only (smaller, no GPU needed)
+pip install torch --index-url https://download.pytorch.org/whl/cpu
+
+# Then install the rest
 pip install -r requirements.txt
 ```
 
